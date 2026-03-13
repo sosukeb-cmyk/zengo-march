@@ -20,10 +20,30 @@ app.post("/api/bookings", async (req, res) => {
   try {
     const payload = req.body;
 
+
+
+        console.log("BOOKING PAYLOAD:", payload);
+
+    payload.dateRange = JSON.stringify(payload.dateRange);
+    payload.tripTabs = JSON.stringify(payload.tripTabs);
+
+
+// Normalize numeric fields
+payload.passengers = parseInt(payload.passengers || 0);
+payload.vehicleCount = parseInt(payload.vehicleCount || 0);
+
+// Extract numeric days from "1 day"
+if (payload.numberOfDays) {
+  const match = payload.numberOfDays.match(/\d+/);
+  payload.numberOfDays = match ? parseInt(match[0]) : 0;
+}
+
+// fallback username
+
     // Ensure a booking reference is present
-    if (!payload.bookingReference) {
-      return res.status(400).json({ message: "Missing bookingReference" });
-    }
+    // if (!payload.bookingReference) {
+    //   return res.status(400).json({ message: "Missing bookingReference" });
+    // }
 
     // Use provided username or default to guest
     payload.username = payload.username || "Guest";

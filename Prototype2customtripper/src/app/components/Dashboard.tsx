@@ -282,7 +282,7 @@ export function Dashboard() {
     const fetchBookings = async () => {
       try {
         setIsLoading(true);
-        const res = await fetch("/api/bookings", { headers: { ...authHeaders() } });
+        const res = await fetch("http://localhost:4000/api/bookings", { headers: { ...authHeaders() } });
         if (!res.ok) {
           throw new Error(`Server returned ${res.status}`);
         }

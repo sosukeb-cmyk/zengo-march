@@ -146,8 +146,8 @@ export function BookingPage() {
 
   const sendBookingToServer = async (payload: any) => {
     try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
+const res = await fetch("http://localhost:4000/api/bookings", {
+          method: "POST",
         headers: {
           "Content-Type": "application/json",
           ...authHeaders(),
@@ -169,6 +169,7 @@ export function BookingPage() {
   };
 
   const handleConfirmBooking = async () => {
+    console.log("Confirm booking clicked");
     // Generate booking reference
     const bookingRef = `BK${Date.now().toString().slice(-8)}`;
 
